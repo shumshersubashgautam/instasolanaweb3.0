@@ -5,9 +5,10 @@ import HomeRightBar from '../components/HomeRightBar';
 import FeedItem from '../components/feed/Item';
 import { useState } from 'react';
 import { Toaster } from 'react-hot-toast';
-
+import { useGlobalState } from '../hooks';
 import EditPostModal from '../components/modals/EditPostModal';
 import CreatePostModal from '../components/modals/CreatePostModal';
+
 
 const style = {
   container: `homepage-feed lg:mr-8 flex flex-col`,
@@ -18,6 +19,12 @@ export default function Home() {
   const [editPostModalOpen, setEditPostModalOpen] = useState(false)
   const [createPostModalOpen, setCreatePostModalOpen] = useState(false)
   const [currentEditPostID, setCurrentEditPostID] = useState(null)
+  const {
+    posts
+  } = useGlobalState()
+
+  //const { program } = useGlobalState()
+ 
 
   // Function to target which post is being edited
   const toggleEditPostModal = (value, postId, owner) => {
@@ -54,13 +61,10 @@ export default function Home() {
     },
   ]
 
-  const staticCreatePost = () => {
-    console.log(`Creating Post!!`)
-  }
+  
 
 
-
-
+  console.log(posts)
   return (
     <Layout
       setCreatePostModalOpen={setCreatePostModalOpen}
@@ -74,8 +78,8 @@ export default function Home() {
 
         <>
           {/* Render posts */}
-          {staticPosts
-            ? staticPosts.map((post, i) => (
+          {posts
+            ? posts.map((post, i) => (
               <FeedItem
                 data={post}
                 key={i}
@@ -87,7 +91,7 @@ export default function Home() {
             ))
             : "Loading..."}
         </>
-        <CreatePostModal createPost={staticCreatePost} createPostModalOpen={createPostModalOpen} setCreatePostModalOpen={setCreatePostModalOpen} />
+        <CreatePostModal  createPostModalOpen={createPostModalOpen} setCreatePostModalOpen={setCreatePostModalOpen} />
         <EditPostModal editPostModalOpen={editPostModalOpen} setEditPostModalOpen={setEditPostModalOpen} currentEditPostID={currentEditPostID} />
       </div>
       <HomeRightBar data={data.suggestions} />

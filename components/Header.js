@@ -31,9 +31,17 @@ const style = {
 }
 
 const Header = ({ setCreatePostModalOpen }) => {
-    const router = useRouter()
+    
 
-    const hasUserAccount = true
+    
+
+    //SOLANA STUFF
+    const {
+        isConnected,
+        hasUserAccount,
+        createUser
+        
+    } = useGlobalState()
 
     return (
         <nav className={style.wrapper}>
@@ -52,7 +60,7 @@ const Header = ({ setCreatePostModalOpen }) => {
                         <></>
                     )}
                     {/* Phantom Connect Button Goes Here */}
-                    <button className={style.button}>Connect Wallet Here</button>
+                    <WalletMultiButton />
                 </div>
             </div>
         </nav>

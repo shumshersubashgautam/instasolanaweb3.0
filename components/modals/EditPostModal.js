@@ -2,11 +2,16 @@ import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
 import { useGlobalState } from "../../hooks";
 
-export default function EditPostModal({ updatePost, currentEditListing, editPostModalOpen, setEditPostModalOpen, currentEditPostID }) {
+export default function EditPostModal({ currentEditListing, editPostModalOpen, setEditPostModalOpen, currentEditPostID }) {
     const [caption, setCaption] = useState('')
 
 
     //SOLANA STUFF
+    const {
+        updatePost,
+        wallet,
+    } = useGlobalState()
+
 
 
     const closeModal = () => {
@@ -29,7 +34,7 @@ export default function EditPostModal({ updatePost, currentEditListing, editPost
         //     imageURL,
         // })
 
-        staticUpdatePost(
+        updatePost(
             wallet?.publicKey,
             currentEditPostID,
             caption
