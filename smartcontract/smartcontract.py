@@ -1,3 +1,4 @@
+#smartcontract of instagram
 # Instagram with Seahorse
 # DISCLAIMER: Since Seahorse is still in early development, there are some
 # parts of this program that are written in less-than-ideal ways.
